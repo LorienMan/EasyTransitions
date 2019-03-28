@@ -43,7 +43,7 @@ internal final class ModalTransitionConfigurator: NSObject, UIViewControllerAnim
         
         let duration = transitionDuration(using: transitionContext)
         
-        let animator = UIViewPropertyAnimator(duration: duration, dampingRatio: 0.8)
+        let animator = UIViewPropertyAnimator(duration: duration, dampingRatio: transitionAnimator.dampingRatio)
         animator.addAnimations {
             self.transitionAnimator.animate(presenting: isPresenting,
                                             modalView: modalView, in: containerView)
