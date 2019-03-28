@@ -40,6 +40,8 @@ public class AppStoreAnimator: ModalTransitionAnimator {
     public var duration: TimeInterval {
         return 0.85
     }
+
+    public private(set) var dampingRatio: CGFloat = 0.8
     
     public func layout(presenting: Bool, modalView: UIView, in container: UIView) {
         guard presenting else {

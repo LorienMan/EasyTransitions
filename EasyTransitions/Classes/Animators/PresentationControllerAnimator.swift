@@ -27,6 +27,8 @@ open class PresentationControllerAnimator: ModalTransitionAnimator {
     open var duration: TimeInterval {
         return 1.0
     }
+
+    public private(set) var dampingRatio: CGFloat = 0.8
     
     public func layout(presenting: Bool, modalView: UIView, in container: UIView) {
         if presenting {
