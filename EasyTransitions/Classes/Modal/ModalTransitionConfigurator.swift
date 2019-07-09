@@ -23,8 +23,14 @@ internal final class ModalTransitionConfigurator: NSObject, UIViewControllerAnim
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         transitionAnimator(using: transitionContext).startAnimation()
     }
-    
-     private func transitionAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
+
+    private var cachedAnimation: UIViewImplicitlyAnimating?
+
+    private func transitionAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
+        if let cachedAnimation = cachedAnimation {
+            return cachedAnimation
+        }
+
         let fromViewController = transitionContext.viewController(forKey: .from)!
         let toViewController = transitionContext.viewController(forKey: .to)!
         
@@ -66,11 +72,17 @@ internal final class ModalTransitionConfigurator: NSObject, UIViewControllerAnim
             }
         }
         animator.isUserInteractionEnabled = true
-        
+
+        cachedAnimation = animator
+
         return animator
     }
     
     public func interruptibleAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
         return transitionAnimator(using: transitionContext)
+    }
+
+    func animationEnded(_ transitionCompleted: Bool) {
+        cachedAnimation = nil
     }
 }
