@@ -15,7 +15,7 @@ open class NavigationTransitionDelegate: NSObject {
     
     open func wire(viewController: UIViewController,
                    with pan: Pan,
-                   beginWhen: @escaping (() -> Bool) = { return true }) {
+                   beginWhen: @escaping ((UIGestureRecognizer) -> Bool) = { _ in true }) {
         interactiveController.wireTo(viewController: viewController, with: pan)
         interactiveController.navigationAction = {
             viewController.navigationController?.popViewController(animated: true)

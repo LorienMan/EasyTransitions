@@ -17,7 +17,7 @@ open class ModalTransitionDelegate: NSObject {
     open func wire(viewController: UIViewController,
                    with pan: Pan,
                    navigationAction: @escaping () -> Void,
-                   beginWhen: @escaping (() -> Bool) = { return true }) {
+                   beginWhen: @escaping ((UIGestureRecognizer) -> Bool) = { _ in true }) {
         interactiveController.wireTo(viewController: viewController, with: pan)
         interactiveController.navigationAction = navigationAction
         interactiveController.shouldBeginTransition = beginWhen

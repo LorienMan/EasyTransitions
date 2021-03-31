@@ -49,7 +49,7 @@ class GalleryTableViewController: UITableViewController {
         navigationDelegate.set(animator: showAnimator, for: .push)
         navigationDelegate.set(animator: showAnimator, for: .pop)
         navigationDelegate.wire(viewController: viewController,
-                                with: .regular(.fromTop), beginWhen: {
+                                with: .regular(.fromTop), beginWhen: { _ in
                                     return viewController.collectionView!.contentOffset.y < 0
         })
         navigationController?.pushViewController(viewController, animated: true)
