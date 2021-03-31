@@ -30,7 +30,7 @@ open class TransitionInteractiveController: UIPercentDrivenInteractiveTransition
     open var navigationAction: (() -> Void) = {
         fatalError("Missing navigationAction (ex: navigation.dismiss) on TransitionInteractiveController")
     }
-    open var shouldBeginTransition: () -> Bool = { return true }
+    open var shouldBeginTransition: (UIGestureRecognizer) -> Bool = { _ in true }
     
     deinit {
         if let gestureRecognizer = gestureRecognizer {
@@ -59,7 +59,7 @@ open class TransitionInteractiveController: UIPercentDrivenInteractiveTransition
         let panned = panGesture.percentagePanned()
         switch recognizer.state {
         case .began:
-            if panVelocity > 0 && shouldBeginTransition() {
+            if panVelocity > 0 && shouldBeginTransition(recognizer) {
                 interactionInProgress = true
                 navigationAction()
             }
